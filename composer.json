@@ -20,7 +20,12 @@
     },
     "extra": {
         "flarum-extension": {
-            "title": "Signature"
+            "title": "Signature",
+            "icon" : {
+                "name" : "pencil-square",
+                "backgroundColor" : "#000",
+                "color": "#DC3522"
+            }
         }
     }
 }

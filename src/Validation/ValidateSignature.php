@@ -6,14 +6,23 @@ use Tobscure\JsonApi\Document;
 use Flarum\Http\Controller\ControllerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Symfony\Component\DomCrawler\Crawler;
+use Flarum\Settings\SettingsRepositoryInterface;
 
 class ValidateSignature implements ControllerInterface
 {
+    private $settings;
+    public function __construct(SettingsRepositoryInterface $settings)
+    {
+        $this->settings = $settings;
+    }
     public function handle(ServerRequestInterface $request)
     {
         $signature = array_get($request->getParsedBody(), 'Signature');
         $sanitized = strip_tags($signature);
         $errorBag = [];
+
+        $char_count = $this->settings->get('xengine-signature.maximum_char_limit') || 1000;
+
 
         if (strlen($sanitized) > 450) {
             $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_char_limit_exceed');

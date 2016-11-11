@@ -11,7 +11,6 @@ use XEngine\Signature\Validation\ValidateSignature;
 
 class AddApplicationAssets
 {
-
     public function subscribe(Dispatcher $events)
     {
         $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
