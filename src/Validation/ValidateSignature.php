@@ -21,10 +21,12 @@ class ValidateSignature implements ControllerInterface
         $sanitized = strip_tags($signature);
         $errorBag = [];
 
-        $char_count = $this->settings->get('xengine-signature.maximum_char_limit') || 1000;
+        $char_count = $this->settings->get('xengine-signature.maximum_char_limit') != "" ? $this->settings->get('xengine-signature.maximum_char_limit') : 1000;
+        $max_width = $this->settings->get('xengine-signature.maximum_image_width') != "" ? $this->settings->get('xengine-signature.maximum_image_width') : 350;
+        $max_height = $this->settings->get('xengine-signature.maximum_image_height') != "" ? $this->settings->get('xengine-signature.maximum_image_height') : 500;
+        $image_count = $this->settings->get('xengine-signature.maximum_image_count') != "" ? $this->settings->get('xengine-signature.maximum_image_count') : 5;
 
-
-        if (strlen($sanitized) > 450) {
+        if (strlen($sanitized) > $char_count) {
             $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_char_limit_exceed');
         }
         $crawler = (new Crawler($signature))->filter('img');
@@ -39,13 +41,13 @@ class ValidateSignature implements ControllerInterface
             });
             $highestwidth = max(array_values($width));
             $highestheight = array_sum($height);
-            if ($highestwidth > 460) {
+            if ($highestwidth > $max_width) {
                 $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_width_exceed');
             }
-            if($highestheight > 350){
+            if($highestheight > $max_height){
                 $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_height_exceed');
             }
-            if($count > 5){
+            if($count > $image_count){
                 $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_count_exceed');
             }
         }

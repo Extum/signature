@@ -407,14 +407,6 @@ System.register('xengine/signature/Components/Model/UserSignature', ['flarum/Mod
         }
     };
 });;
-System.register("xengine/signature/Components/Navigation/SignatureNavLink", [], function (_export) {
-  "use strict";
-
-  return {
-    setters: [],
-    execute: function () {}
-  };
-});;
 System.register('xengine/signature/Components/View/SignatureSettings', ['xengine/signature/Components/Model/UserSignature', 'flarum/components/UserPage', 'flarum/helpers/listItems', 'flarum/utils/ItemList', 'flarum/components/Button', 'xengine/signature/Components/Fields/SignatureTextarea', 'xengine/signature/Components/Modal/SignatureLoadingModal'], function (_export) {
     'use strict';
 
@@ -486,12 +478,10 @@ System.register('xengine/signature/Components/View/SignatureSettings', ['xengine
                             className: 'Signature',
                             rows: 10,
                             cols: 100,
-                            placeHolder: 'Enter your signature here',
-                            content: this.model.getSignature(),
-                            children: 'Save Signature'
+                            content: this.model.getSignature()
                         }));
                         items.add('saveSignature', Button.component({
-                            children: 'Save Signature',
+                            children: app.translator.trans('xengine-signature.forum.buttons.save'),
                             className: 'Button',
                             onclick: function onclick() {
                                 return _this.saveSignature();
@@ -501,24 +491,12 @@ System.register('xengine/signature/Components/View/SignatureSettings', ['xengine
                         return items;
                     }
                 }, {
-                    key: 'signatureFields',
-                    value: function signatureFields() {
-                        var items = new ItemList();
-
-                        items.add('textSignature', SignatureTextarea.component({
-                            className: 'Signature',
-                            rows: 10,
-                            cols: 100,
-                            placeHolder: 'Enter your signature here',
-                            children: 'Save Signature'
-                        }));
-
-                        return items;
-                    }
-                }, {
                     key: 'saveSignature',
                     value: function saveSignature() {
-                        app.modal.show(new SignatureLoadingModal({ title: 'Yükleniyor', value: 'Lütfen bekleyiniz' }));
+                        app.modal.show(new SignatureLoadingModal({
+                            title: app.translator.trans('xengine-signature.forum.modal.loading.title'),
+                            value: app.translator.trans('xengine-signature.forum.modal.loading.content')
+                        }));
                         this.signature = $('.Signature').trumbowyg('html');
 
                         var data = { Signature: this.signature };
@@ -533,7 +511,12 @@ System.register('xengine/signature/Components/View/SignatureSettings', ['xengine
                     key: 'response',
                     value: function response(_response) {
                         if (!_response.status) {
-                            app.modal.show(new SignatureLoadingModal({ title: 'Bir sorun oluştu :(', value: '', errors: _response.errors, close: true }));
+                            app.modal.show(new SignatureLoadingModal({
+                                title: app.translator.trans('xengine-signature.forum.modal.error.title'),
+                                value: app.translator.trans('xengine-signature.forum.modal.error.content'),
+                                errors: _response.errors,
+                                close: true
+                            }));
                         } else {
                             this.model.setSignature(this.signature).then(function () {
                                 window.location.reload();
@@ -573,7 +556,7 @@ System.register('xengine/signature/main', ['flarum/extend', 'flarum/app', 'xengi
                 extend(UserPage.prototype, 'navItems', function (dom) {
                     dom.add('Signature', LinkButton.component({
                         href: app.route('settings.signature'),
-                        children: 'Signature',
+                        children: app.translator.trans('xengine-signature.forum.buttons.signature'),
                         icon: 'photo'
                     }), -100);
                 });
