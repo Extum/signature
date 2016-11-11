@@ -5,6 +5,7 @@ use Flarum\Event\ConfigureWebApp;
 use Flarum\Event\ConfigureForumRoutes;
 use Flarum\Event\ConfigureApiRoutes;
 use Flarum\Event\ConfigureLocales;
+use DirectoryIterator;
 use Illuminate\Contracts\Events\Dispatcher;
 use XEngine\Signature\Validation\ValidateSignature;
 
