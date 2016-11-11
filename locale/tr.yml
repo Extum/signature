@@ -1,0 +1,17 @@
+xengine-signature:
+    forum:
+        buttons:
+            signature: İmza
+            save: İmzayı Kaydet
+        modal:
+            loading:
+                title : Yükleniyor
+                content : Lütfen bekleyin :) ...
+            error:
+                title : Amanın! Sanırım hata ile karşılaştık...
+                content : ''
+        errors:
+            max_char_limit_exceed: En fazla belirlenen karakter limitini aşıldı
+            max_image_width_exceed: En fazla belirlenen resim genişliği aşıldı
+            max_image_height_exceed: En fazla belirlenen resim uzunluğu aşıldı
+            max_image_count_exceed: En fazla belirlenen resim sayısı aşıldı

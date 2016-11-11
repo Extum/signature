@@ -1,0 +1,17 @@
+xengine-signature:
+    forum:
+        buttons:
+            signature: Signature
+            save: Save Signature
+        modal:
+            loading:
+                title: Loading
+                content: Please wait...
+            error:
+                title: Whoops! Encountered some errors..
+                content: ''
+        errors:
+             max_char_limit_exceed: Maximum character limit exceeded
+             max_image_width_exceed: Maximum image width limit exceeded
+             max_image_height_exceed: Maximum image height limit exceeded
+             max_image_count_exceed: Maximum image count exceeded.

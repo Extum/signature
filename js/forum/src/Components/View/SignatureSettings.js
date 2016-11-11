@@ -40,14 +40,12 @@ export default class SignatureSettings extends UserPage {
                 className: 'Signature',
                 rows: 10,
                 cols: 100,
-                placeHolder: 'Enter your signature here',
-                content: this.model.getSignature(),
-                children: 'Save Signature',
+                content: this.model.getSignature()
             })
         );
         items.add('saveSignature',
             Button.component({
-                children: 'Save Signature',
+                children: app.translator.trans('xengine-signature.forum.buttons.save'),
                 className: 'Button',
                 onclick: () => this.saveSignature()
             })
@@ -56,24 +54,11 @@ export default class SignatureSettings extends UserPage {
         return items;
     }
 
-    signatureFields() {
-        const items = new ItemList();
-
-        items.add('textSignature',
-            SignatureTextarea.component({
-                className: 'Signature',
-                rows: 10,
-                cols: 100,
-                placeHolder: 'Enter your signature here',
-                children: 'Save Signature',
-            })
-        );
-
-        return items;
-    }
-
     saveSignature() {
-        app.modal.show(new SignatureLoadingModal({title: 'Yükleniyor', value: 'Lütfen bekleyiniz'}));
+        app.modal.show(new SignatureLoadingModal({
+            title: app.translator.trans('xengine-signature.forum.modal.loading.title'),
+            value: app.translator.trans('xengine-signature.forum.modal.loading.content')
+        }));
         this.signature = $('.Signature').trumbowyg('html');
 
         const data = {Signature: this.signature};
@@ -89,7 +74,12 @@ export default class SignatureSettings extends UserPage {
 
     response(response) {
         if (!response.status) {
-            app.modal.show(new SignatureLoadingModal({title: 'Bir sorun oluştu :(', value: '', errors: response.errors, close: true}));
+            app.modal.show(new SignatureLoadingModal({
+                title: app.translator.trans('xengine-signature.forum.modal.error.title'),
+                value: app.translator.trans('xengine-signature.forum.modal.error.content'),
+                errors: response.errors,
+                close: true
+            }));
         }else{
             this.model.setSignature(this.signature).then(()=> {
                 window.location.reload();

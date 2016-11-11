@@ -16,7 +16,7 @@ class ValidateSignature implements ControllerInterface
         $errorBag = [];
 
         if (strlen($sanitized) > 450) {
-            $errorBag[] = 'Maximum karakter limiti aşıldı';
+            $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_char_limit_exceed');
         }
         $crawler = (new Crawler($signature))->filter('img');
         $width = [];
@@ -31,13 +31,13 @@ class ValidateSignature implements ControllerInterface
             $highestwidth = max(array_values($width));
             $highestheight = array_sum($height);
             if ($highestwidth > 460) {
-                $errorBag[] = 'Maksimum resim genişliği bir veya daha fazla resimde aşıldı.';
+                $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_width_exceed');
             }
             if($highestheight > 350){
-                $errorBag[] = 'Maksimum resim uzunluğu bir veya daha fazla resimde aşıldı.';
+                $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_height_exceed');
             }
             if($count > 5){
-                $errorBag[] = 'Maksimum resim sayısı bir veya daha fazla resimde aşıldı.';
+                $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_image_count_exceed');
             }
         }
         if(count($errorBag) > 0){

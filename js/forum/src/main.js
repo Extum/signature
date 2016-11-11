@@ -11,7 +11,7 @@ app.initializers.add('xengine-signature', () => {
         dom.add('Signature',
             LinkButton.component({
                 href: app.route('settings.signature'),
-                children: 'Signature',
+                children: app.translator.trans('xengine-signature.forum.buttons.signature'),
                 icon: 'photo'
             }),
             -100);
