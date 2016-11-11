@@ -23,7 +23,7 @@ class AddApplicationAssets
             $event->addAssets([
                 __DIR__ . '/../../js/forum/dist/extension.js',
                 __DIR__ . '/../../less/signature.less',
-                __DIR__ . '/../../less/trumbowyg.css',
+                __DIR__ . '/../../less/trumbowyg.less',
             ]);
             $event->addBootstrapper('xengine/signature/main');
         }
