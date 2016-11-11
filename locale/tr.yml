@@ -9,7 +9,7 @@ xengine-signature:
                 content : Lütfen bekleyin :) ...
             error:
                 title : Amanın! Sanırım hata ile karşılaştık...
-                content : ''
+                content : Hataların listesi
         errors:
             max_char_limit_exceed: En fazla belirlenen karakter limitini aşıldı
             max_image_width_exceed: En fazla belirlenen resim genişliği aşıldı
