@@ -11,10 +11,10 @@ xengine-signature:
                 title: Whoops! Napotkano kilka problemów...
                 content: Lista problemów:
         errors:
-             max_char_limit_exceed: Przekroczono limit znaków
-             max_image_width_exceed: Przekroczono maksymalną szerokość obrazka
-             max_image_height_exceed: Przekroczono maksymalną wysokość obrazka
-             max_image_count_exceed: Przekroczono maksymalną ilość obrazków
+             max_char_limit_exceed: Przekroczono limit znaków.
+             max_image_width_exceed: Przekroczono maksymalną szerokość obrazka.
+             max_image_height_exceed: Przekroczono maksymalną wysokość obrazka.
+             max_image_count_exceed: Przekroczono maksymalną ilość obrazków.
     admin:
         title: Sygnatura
         settings:
