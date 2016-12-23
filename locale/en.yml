@@ -8,12 +8,12 @@ xengine-signature:
                 title: Loading
                 content: Please wait...
             error:
-                title: Whoops! Encountered some errors..
-                content: List of errors :
+                title: Whoops! Encountered some errors...
+                content: List of errors:
         errors:
-             max_char_limit_exceed: Maximum character limit exceeded
-             max_image_width_exceed: Maximum image width limit exceeded
-             max_image_height_exceed: Maximum image height limit exceeded
+             max_char_limit_exceed: Maximum character limit exceeded.
+             max_image_width_exceed: Maximum image width limit exceeded.
+             max_image_height_exceed: Maximum image height limit exceeded.
              max_image_count_exceed: Maximum image count exceeded.
     admin:
         title: Signature
@@ -28,5 +28,5 @@ xengine-signature:
                 description : Maximum inserted images.
                 placeholder : 5 (default)
             maximum_char_limit:
-                description : Maximum character limit of signature ( count characters, does not considering with HTML tags )
+                description : Maximum character limit of signature (count characters, does not considering with HTML tags)
                 placeholder : 1000 (default)
