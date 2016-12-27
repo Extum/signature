@@ -561,7 +561,7 @@ System.register('xengine/signature/main', ['flarum/extend', 'flarum/app', 'xengi
                     }), -100);
                 });
 
-                extend(Post.prototype, 'view', function (vdom) {
+                extend(CommentPost.prototype, 'view', function (vdom) {
                     var Signature = this.props.post.user().data.attributes.signature || false;
 
                     if (Signature) {

@@ -17,7 +17,7 @@ app.initializers.add('xengine-signature', () => {
             -100);
     })
 
-    extend(Post.prototype, 'view', function (vdom) {
+    extend(CommentPost.prototype, 'view', function (vdom) {
         const Signature = this.props.post.user().data.attributes.signature || false
 
         if (Signature) {
