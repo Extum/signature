@@ -531,10 +531,10 @@ System.register('xengine/signature/Components/View/SignatureSettings', ['xengine
         }
     };
 });;
-System.register('xengine/signature/main', ['flarum/extend', 'flarum/app', 'xengine/signature/Components/View/SignatureSettings', 'flarum/components/LinkButton', 'flarum/components/UserPage', 'flarum/components/Post'], function (_export) {
+System.register('xengine/signature/main', ['flarum/extend', 'flarum/app', 'xengine/signature/Components/View/SignatureSettings', 'flarum/components/LinkButton', 'flarum/components/UserPage', 'flarum/components/CommentPost'], function (_export) {
     'use strict';
 
-    var extend, app, SignatureSettings, LinkButton, UserPage, Post;
+    var extend, app, SignatureSettings, LinkButton, UserPage, CommentPost;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
@@ -546,8 +546,8 @@ System.register('xengine/signature/main', ['flarum/extend', 'flarum/app', 'xengi
             LinkButton = _flarumComponentsLinkButton['default'];
         }, function (_flarumComponentsUserPage) {
             UserPage = _flarumComponentsUserPage['default'];
-        }, function (_flarumComponentsPost) {
-            Post = _flarumComponentsPost['default'];
+        }, function (_flarumComponentsCommentPost) {
+            CommentPost = _flarumComponentsCommentPost['default'];
         }],
         execute: function () {
 

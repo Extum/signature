@@ -3,7 +3,7 @@ import app from 'flarum/app';
 import SignatureSettings from 'xengine/signature/Components/View/SignatureSettings';
 import LinkButton from 'flarum/components/LinkButton';
 import UserPage from 'flarum/components/UserPage';
-import Post from 'flarum/components/Post';
+import CommentPost from 'flarum/components/CommentPost';
 
 app.initializers.add('xengine-signature', () => {
     app.routes['settings.signature'] = {path: '/settings/signature', component: SignatureSettings.component()};
