@@ -12,7 +12,7 @@ app.initializers.add('xengine-signature', () => {
             LinkButton.component({
                 href: app.route('settings.signature'),
                 children: app.translator.trans('xengine-signature.forum.buttons.signature'),
-                icon: 'photo'
+                icon: 'fas fa-signature'
             }),
             -100);
     })
