@@ -1,7 +1,6 @@
 import {extend} from 'flarum/extend';
-import './library/trumbowywg';
 import app from 'flarum/app';
-import SignatureSettings from './components/View/SignatureSetting';
+import SignatureSettings from './components/View/SignatureSettings';
 import LinkButton from 'flarum/components/LinkButton';
 import UserPage from 'flarum/components/UserPage';
 import CommentPost from 'flarum/components/CommentPost';

@@ -1,10 +1,10 @@
-import UserSignature from 'xengine/signature/Components/Model/UserSignature';
+import UserSignature from '../Model/UserSignature';
 import UserPage from 'flarum/components/UserPage';
 import listItems from 'flarum/helpers/listItems';
 import ItemList from 'flarum/utils/ItemList';
 import Button from 'flarum/components/Button';
-import SignatureTextarea from 'xengine/signature/Components/Fields/SignatureTextarea';
-import SignatureLoadingModal from 'xengine/signature/Components/Modal/SignatureLoadingModal';
+import SignatureTextarea from '../Fields/SignatureTextarea';
+import SignatureLoadingModal from '../Modal/SignatureLoadingModal';
 
 export default class SignatureSettings extends UserPage {
     init() {
