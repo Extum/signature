@@ -3,7 +3,7 @@ namespace XEngine\Signature\Model;
 
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Event\PrepareApiAttributes;
-use Flarum\Core\Access\AssertPermissionTrait;
+use Flarum\User\AssertPermissionTrait;
 use Flarum\Event\UserWillBeSaved;
 use Illuminate\Contracts\Events\Dispatcher;
 use Symfony\Component\DomCrawler\Crawler;
