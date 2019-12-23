@@ -1,10 +1,9 @@
 <?php
 namespace XEngine\Signature\Listener;
 
-use Flarum\Event\ConfigureWebApp;
-use Flarum\Event\ConfigureForumRoutes;
-use Flarum\Event\ConfigureApiRoutes;
-use Flarum\Event\ConfigureLocales;
+use Flarum\Extend\Frontend;
+use Flarum\Extend\Routes;
+use Flarum\Extend\Locales;
 use DirectoryIterator;
 use Illuminate\Contracts\Events\Dispatcher;
 use XEngine\Signature\Validation\ValidateSignature;
