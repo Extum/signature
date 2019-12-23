@@ -1,4 +1,5 @@
 import {extend} from 'flarum/extend';
+import './library/trumbowywg';
 import app from 'flarum/app';
 import SignatureSettings from './Components/View/SignatureSettings';
 import LinkButton from 'flarum/components/LinkButton';
