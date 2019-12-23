@@ -5,14 +5,19 @@ use XEngine\Signature\Model;
 use Flarum\Extend;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less')
-        ->route('/t/{slug}', 'tag')
-        ->route('/tags', 'tags'),
+new Extend\Locales(__DIR__.'/locale'),
+(new Extend\Frontend('forum'))
+  ->js(__DIR__.'/js/dist/forum.js')
+  ->less(__DIR__.'/less/signature.less')
+  ->less(__DIR__.'/less/trumbowyg.less'),
+(new Extend\Frontend('admin'))
+  ->js(__DIR__.'/js/dist/admin.js'),
+(new Extend\Routes('forum'))
+  ->get('/settings/signature', 'settings.signature'),
+(new Extend\Routes('api'))
+  ->post('/settings/signature/validate', 'settings.signature', ValidateSignature::class);
 
         function (Dispatcher $events) {
-    $events->subscribe(Listener\AddApplicationAssets::class);
     $events->subscribe(Model\UserSignatureAttributes::class);
 };
     }
