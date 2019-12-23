@@ -1,6 +1,6 @@
 import {extend} from 'flarum/extend';
 import app from 'flarum/app';
-import SignatureSettings from 'xengine/signature/Components/View/SignatureSettings';
+import SignatureSettings from './Components/View/SignatureSettings';
 import LinkButton from 'flarum/components/LinkButton';
 import UserPage from 'flarum/components/UserPage';
 import CommentPost from 'flarum/components/CommentPost';
