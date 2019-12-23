@@ -5,13 +5,15 @@ import LinkButton from 'flarum/components/LinkButton';
 import UserPage from 'flarum/components/UserPage';
 import CommentPost from 'flarum/components/CommentPost';
 
-app.initializers.add('xengine-signature', () => {
+
+
+app.initializers.add('Xengine-signature', () => {
     app.routes['settings.signature'] = {path: '/settings/signature', component: SignatureSettings.component()};
     extend(UserPage.prototype, 'navItems', function (dom) {
         dom.add('Signature',
             LinkButton.component({
                 href: app.route('settings.signature'),
-                children: app.translator.trans('xengine-signature.forum.buttons.signature'),
+                children: app.translator.trans('katos-signature.forum.buttons.signature'),
                 icon: 'fas fa-signature'
             }),
             -100);
