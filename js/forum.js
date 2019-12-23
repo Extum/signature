@@ -7,4 +7,5 @@
  * file that was distributed with this source code.
  */
 
+import './src/forum/library/trumbowyg.js';
 export * from './src/forum';
