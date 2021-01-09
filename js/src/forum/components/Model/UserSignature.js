@@ -12,6 +12,6 @@ export default class UserSignature {
     }
 
     setSignature(signature) {
-        return this._userdata.save({signature: signature});
+        return this._userdata.save({ signature: signature });
     }
 }

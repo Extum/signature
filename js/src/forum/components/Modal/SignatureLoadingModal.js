@@ -25,11 +25,12 @@ export default class SignatureLoadingModal extends Modal {
     content() {
         let ErrorWindow = '';
         if (this.errors) {
-            ErrorWindow = m("ul",
+            ErrorWindow = m(
+                'ul',
                 this.errors.map(function (error) {
-                    return m("li", {}, error);
+                    return m('li', {}, error);
                 })
-            )
+            );
         }
         return (
             <div className="Modal-body">
@@ -38,5 +39,4 @@ export default class SignatureLoadingModal extends Modal {
             </div>
         );
     }
-
 }

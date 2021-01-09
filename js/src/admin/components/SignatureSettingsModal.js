@@ -13,28 +13,36 @@ export default class SignatureSettingsModal extends SettingsModal {
         return [
             <div className="Form-group">
                 <label>{app.translator.trans('Xengine-signature.admin.settings.maximum_image_width.description')}</label>
-                <input className="FormControl"
-                       placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_width.placeholder')}
-                       bidi={this.setting('Xengine-signature.maximum_image_width')}/>
+                <input
+                    className="FormControl"
+                    placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_width.placeholder')}
+                    bidi={this.setting('Xengine-signature.maximum_image_width')}
+                />
             </div>,
             <div className="Form-group">
                 <label>{app.translator.trans('Xengine-signature.admin.settings.maximum_image_height.description')}</label>
-                <input className="FormControl"
-                       placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_height.placeholder')}
-                       bidi={this.setting('Xengine-signature.maximum_image_height')}/>
+                <input
+                    className="FormControl"
+                    placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_height.placeholder')}
+                    bidi={this.setting('Xengine-signature.maximum_image_height')}
+                />
             </div>,
             <div className="Form-group">
                 <label>{app.translator.trans('Xengine-signature.admin.settings.maximum_image_count.description')}</label>
-                <input className="FormControl"
-                       placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_count.placeholder')}
-                       bidi={this.setting('Xengine-signature.maximum_image_count')}/>
+                <input
+                    className="FormControl"
+                    placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_image_count.placeholder')}
+                    bidi={this.setting('Xengine-signature.maximum_image_count')}
+                />
             </div>,
             <div className="Form-group">
                 <label>{app.translator.trans('Xengine-signature.admin.settings.maximum_char_limit.description')}</label>
-                <input className="FormControl"
-                       placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_char_limit.placeholder')}
-                       bidi={this.setting('Xengine-signature.maximum_char_limit')}/>
-            </div>
-        ]
+                <input
+                    className="FormControl"
+                    placeholder={app.translator.trans('Xengine-signature.admin.settings.maximum_char_limit.placeholder')}
+                    bidi={this.setting('Xengine-signature.maximum_char_limit')}
+                />
+            </div>,
+        ];
     }
 }

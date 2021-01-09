@@ -19,13 +19,12 @@ export default class SignatureSettings extends UserPage {
         this.model = new UserSignature(app.session.user);
     }
 
-
     content() {
         return (
             <div className="SettingsPage">
                 <ul>{listItems(this.signatureItems().toArray())}</ul>
             </div>
-        )
+        );
     }
 
     /**
@@ -36,15 +35,10 @@ export default class SignatureSettings extends UserPage {
     signatureItems() {
         const items = new ItemList();
 
-        items.add('signature',
-            <SignatureTextarea className='Signature'
-                               rows={10}
-                               cols={100}
-                               content={this.model.getSignature()} />
-        );
-        items.add('saveSignature',
-            <Button className='Button'
-                    onclick={() => this.saveSignature()}>
+        items.add('signature', <SignatureTextarea className="Signature" rows={10} cols={100} content={this.model.getSignature()} />);
+        items.add(
+            'saveSignature',
+            <Button className="Button" onclick={() => this.saveSignature()}>
                 {app.translator.trans('Xengine-signature.forum.buttons.save')}
             </Button>
         );
@@ -55,34 +49,31 @@ export default class SignatureSettings extends UserPage {
     saveSignature() {
         app.modal.show(SignatureLoadingModal, {
             titleText: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
-            value: app.translator.trans('Xengine-signature.forum.modal.loading.content')
+            value: app.translator.trans('Xengine-signature.forum.modal.loading.content'),
         });
         this.signature = $('.Signature').trumbowyg('html');
 
-        const data = {signature: this.signature};
+        const data = { signature: this.signature };
 
         app.request({
             url: app.forum.attribute('apiUrl') + '/settings/signature/validate',
             method: 'POST',
-            body: data
-        }).then(
-            this.response.bind(this)
-        );
+            body: data,
+        }).then(this.response.bind(this));
     }
 
     response(response) {
         if (!response.status) {
-            app.modal.show(SignatureLoadingModal, {
-                titleText: app.translator.trans('Xengine-signature.forum.modal.error.title'),
-                value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
-                errors: response.errors
-            });
-
-            m.redraw();
-        }else{
-            this.model.setSignature(this.signature).then(()=> {
+            if (response.errors) {
+                app.alerts.show({ type: 'error ' }, [app.translator.trans('Xengine-signature.forum.modal.error.title'), '\n', response.errors.map(e => `${e}\n`)]);
+            } else {
+                app.alerts.show({ type: 'error ' }, app.translator.trans('Xengine-signature.forum.modal.error.title'));
+            }
+            app.modal.close();
+        } else {
+            this.model.setSignature(this.signature).then(() => {
                 window.location.reload();
-            })
+            });
         }
     }
 }

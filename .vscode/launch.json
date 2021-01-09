@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Flarum Chrome",
+            "request": "launch",
+            "type": "pwa-chrome",
+            "url": "http://localhost/flarum/public",
+            "webRoot": "${workspaceFolder}/js/dist"
+        },
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}/js/src"
+        },
+        {
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",
