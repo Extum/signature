@@ -1,3 +1,4 @@
+import app from 'flarum/app';
 import UserSignature from '../Model/UserSignature';
 import UserPage from 'flarum/components/UserPage';
 import listItems from 'flarum/helpers/listItems';
@@ -58,12 +59,12 @@ export default class SignatureSettings extends UserPage {
         });
         this.signature = $('.Signature').trumbowyg('html');
 
-        const data = {Signature: this.signature};
+        const data = {signature: this.signature};
 
         app.request({
             url: app.forum.attribute('apiUrl') + '/settings/signature/validate',
             method: 'POST',
-            data: data
+            body: data
         }).then(
             this.response.bind(this)
         );
@@ -74,9 +75,10 @@ export default class SignatureSettings extends UserPage {
             app.modal.show(SignatureLoadingModal, {
                 titleText: app.translator.trans('Xengine-signature.forum.modal.error.title'),
                 value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
-                errors: response.errors,
-                close: true
+                errors: response.errors
             });
+
+            m.redraw();
         }else{
             this.model.setSignature(this.signature).then(()=> {
                 window.location.reload();
