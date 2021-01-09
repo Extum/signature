@@ -1,7 +1,24 @@
+import { settings } from '@fof-components';
 import app from 'flarum/app';
 
-import SignatureSettingsModal from './components/SignatureSettingsModal';
+const {
+    SettingsModal,
+    items: { StringItem }
+} = settings;
 
-app.initializers.add('Xengine-signature', () => {
-    app.extensionSettings['Xengine-signature'] = () => app.modal.show(new SignatureSettingsModal());
+
+app.initializers.add('cxsquared/signature', () => {
+    app.extensionSettings['cxsquared/signature'] = () => app.modal.show(SettingsModal, {
+        tite: app.translator.trans('cxsquared-signature.admin.title'),
+        items: (s) => [
+            <div className="Forum-group">
+                <StringItem name="Xengine-signature.maximum_image_width"
+                            setting={s}
+                            label={app.translator.trans('cxsquared-signature.settings.maximum_image_width.description')} />
+                <StringItem name="Xengine-signature.maximum_image_height" setting={s} />
+                <StringItem name="Xengine-signature.maximum_image_count" setting={s} />
+                <StringItem name="Xengine-signature.maximum_image_char_limit" setting={s} />
+            </div>
+        ]
+    });
 }); 

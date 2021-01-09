@@ -170,7 +170,7 @@ export default class SignatureTextarea extends Component {
                         </symbol>
                     </svg>
                 </div>
-                <div config={this.configTextarea(this)} className={this.props.className}>{m.trust(this.props.content)}</div>
+                <div config={this.configTextarea(this)} className={this.attrs.className}>{m.trust(this.attrs.content)}</div>
             </div>
         )
     }
@@ -178,7 +178,7 @@ export default class SignatureTextarea extends Component {
     configTextarea(element) {
         m.redraw();
 
-        const Texteditor = $('.' + this.props.className);
+        const Texteditor = $('.' + this.attrs.className);
         Texteditor.trumbowyg({
             btns: [
                 ['formatting'],

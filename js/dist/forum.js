@@ -396,13 +396,13 @@ function (_Component) {
       d: "M48 35.9L36 49.6 24 36h24z"
     })))), m("div", {
       config: this.configTextarea(this),
-      className: this.props.className
-    }, m.trust(this.props.content)));
+      className: this.attrs.className
+    }, m.trust(this.attrs.content)));
   };
 
   _proto.configTextarea = function configTextarea(element) {
     m.redraw();
-    var Texteditor = $('.' + this.props.className);
+    var Texteditor = $('.' + this.attrs.className);
     Texteditor.trumbowyg({
       btns: [['formatting'], 'btnGrp-semantic', ['superscript', 'subscript'], ['link'], ['insertImage'], 'btnGrp-justify', ['fullscreen']],
       autogrow: true,
@@ -431,12 +431,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Modal */ "flarum/components/Modal");
 /* harmony import */ var flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Modal__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var flarum_components_FieldSet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/FieldSet */ "flarum/components/FieldSet");
-/* harmony import */ var flarum_components_FieldSet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_FieldSet__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_utils_ItemList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/utils/ItemList */ "flarum/utils/ItemList");
-/* harmony import */ var flarum_utils_ItemList__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_utils_ItemList__WEBPACK_IMPORTED_MODULE_3__);
-
-
 
 
 
@@ -452,10 +446,10 @@ function (_Modal) {
   var _proto = SignatureLoadingModal.prototype;
 
   _proto.init = function init() {
-    this.value = this.props.value;
-    this.title = m.prop(this.props.title || '');
-    this.close = this.props.close || false;
-    this.errors = this.props.errors || false;
+    this.value = this.attrs.value;
+    this.title = m.prop(this.attrs.title || '');
+    this.close = this.attrs.close || false;
+    this.errors = this.attrs.errors || false;
   };
 
   _proto.isDismissible = function isDismissible() {
@@ -573,8 +567,8 @@ function (_UserPage) {
 
   var _proto = SignatureSettings.prototype;
 
-  _proto.init = function init() {
-    _UserPage.prototype.init.call(this);
+  _proto.oninit = function oninit(vnode) {
+    _UserPage.prototype.init.call(this, vnode);
 
     this.show(app.session.user);
     app.drawer.hide();
@@ -606,7 +600,7 @@ function (_UserPage) {
       content: this.model.getSignature()
     }));
     items.add('saveSignature', flarum_components_Button__WEBPACK_IMPORTED_MODULE_5___default.a.component({
-      children: app.translator.trans('Xengine-signature.forum.buttons.save'),
+      text: app.translator.trans('Xengine-signature.forum.buttons.save'),
       className: 'Button',
       onclick: function onclick() {
         return _this.saveSignature();
@@ -616,10 +610,10 @@ function (_UserPage) {
   };
 
   _proto.saveSignature = function saveSignature() {
-    app.modal.show(new _Modal_SignatureLoadingModal__WEBPACK_IMPORTED_MODULE_7__["default"]({
+    app.modal.show(_Modal_SignatureLoadingModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
       title: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
       value: app.translator.trans('Xengine-signature.forum.modal.loading.content')
-    }));
+    });
     this.signature = $('.Signature').trumbowyg('html');
     var data = {
       Signature: this.signature
@@ -633,12 +627,12 @@ function (_UserPage) {
 
   _proto.response = function response(_response) {
     if (!_response.status) {
-      app.modal.show(new _Modal_SignatureLoadingModal__WEBPACK_IMPORTED_MODULE_7__["default"]({
+      app.modal.show(_Modal_SignatureLoadingModal__WEBPACK_IMPORTED_MODULE_7__["default"], {
         title: app.translator.trans('Xengine-signature.forum.modal.error.title'),
         value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
         errors: _response.errors,
         close: true
-      }));
+      });
     } else {
       this.model.setSignature(this.signature).then(function () {
         window.location.reload();
@@ -687,16 +681,18 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('Xengine-sign
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_UserPage__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'navItems', function (dom) {
     dom.add('Signature', flarum_components_LinkButton__WEBPACK_IMPORTED_MODULE_3___default.a.component({
       href: flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.route('settings.signature'),
-      children: flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('katos-signature.forum.buttons.signature'),
+      text: flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('katos-signature.forum.buttons.signature'),
       icon: 'fas fa-signature'
     }), -100);
   });
-  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_5___default.a.prototype, 'view', function (vdom) {
-    var Signature = this.props.post.user().data.attributes.signature || false;
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_5___default.a.prototype, 'view', function (vnode) {
+    var Signature = this.attrs.post.user().data.attributes.signature || false;
 
     if (Signature) {
-      vdom.children.push(m('div.SignatureWrapper', m.trust(Signature)));
+      vnode.children.push(m('div.SignatureWrapper', {}, m.trust(Signature)));
     }
+
+    return vnode;
   });
 });
 
@@ -1649,17 +1645,6 @@ module.exports = flarum.core.compat['components/Button'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['components/CommentPost'];
-
-/***/ }),
-
-/***/ "flarum/components/FieldSet":
-/*!************************************************************!*\
-  !*** external "flarum.core.compat['components/FieldSet']" ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = flarum.core.compat['components/FieldSet'];
 
 /***/ }),
 

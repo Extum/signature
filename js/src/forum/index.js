@@ -5,25 +5,25 @@ import LinkButton from 'flarum/components/LinkButton';
 import UserPage from 'flarum/components/UserPage';
 import CommentPost from 'flarum/components/CommentPost';
 
-
-
 app.initializers.add('Xengine-signature', () => {
     app.routes['settings.signature'] = {path: '/settings/signature', component: SignatureSettings.component()};
     extend(UserPage.prototype, 'navItems', function (dom) {
         dom.add('Signature',
             LinkButton.component({
                 href: app.route('settings.signature'),
-                children: app.translator.trans('katos-signature.forum.buttons.signature'),
+                text: app.translator.trans('katos-signature.forum.buttons.signature'),
                 icon: 'fas fa-signature'
             }),
             -100);
     })
 
-    extend(CommentPost.prototype, 'view', function (vdom) {
-        const Signature = this.props.post.user().data.attributes.signature || false
+    extend(CommentPost.prototype, 'view', function (vnode) {
+        const Signature = this.attrs.post.user().data.attributes.signature || false
 
         if (Signature) {
-            vdom.children.push(m('div.SignatureWrapper', m.trust(Signature)));
+            vnode.children.push(m('div.SignatureWrapper', {},  m.trust(Signature)));
         }
+
+        return vnode;
     });
 });

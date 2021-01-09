@@ -101,94 +101,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
-}
-
-/***/ }),
-
-/***/ "./src/admin/components/SignatureSettingsModal.js":
-/*!********************************************************!*\
-  !*** ./src/admin/components/SignatureSettingsModal.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SignatureSettingsModal; });
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/SettingsModal */ "flarum/components/SettingsModal");
-/* harmony import */ var flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var SignatureSettingsModal =
-/*#__PURE__*/
-function (_SettingsModal) {
-  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(SignatureSettingsModal, _SettingsModal);
-
-  function SignatureSettingsModal() {
-    return _SettingsModal.apply(this, arguments) || this;
-  }
-
-  var _proto = SignatureSettingsModal.prototype;
-
-  _proto.className = function className() {
-    return 'SignatureSettingsModal Modal--medium';
-  };
-
-  _proto.title = function title() {
-    return app.translator.trans('Xengine-signature.admin.settings.title');
-  };
-
-  _proto.form = function form() {
-    return [m("div", {
-      className: "Form-group"
-    }, m("label", null, app.translator.trans('Xengine-signature.admin.settings.maximum_image_width.description')), m("input", {
-      className: "FormControl",
-      placeholder: app.translator.trans('Xengine-signature.admin.settings.maximum_image_width.placeholder'),
-      bidi: this.setting('Xengine-signature.maximum_image_width')
-    })), m("div", {
-      className: "Form-group"
-    }, m("label", null, app.translator.trans('Xengine-signature.admin.settings.maximum_image_height.description')), m("input", {
-      className: "FormControl",
-      placeholder: app.translator.trans('Xengine-signature.admin.settings.maximum_image_height.placeholder'),
-      bidi: this.setting('Xengine-signature.maximum_image_height')
-    })), m("div", {
-      className: "Form-group"
-    }, m("label", null, app.translator.trans('Xengine-signature.admin.settings.maximum_image_count.description')), m("input", {
-      className: "FormControl",
-      placeholder: app.translator.trans('Xengine-signature.admin.settings.maximum_image_count.placeholder'),
-      bidi: this.setting('Xengine-signature.maximum_image_count')
-    })), m("div", {
-      className: "Form-group"
-    }, m("label", null, app.translator.trans('Xengine-signature.admin.settings.maximum_char_limit.description')), m("input", {
-      className: "FormControl",
-      placeholder: app.translator.trans('Xengine-signature.admin.settings.maximum_char_limit.placeholder'),
-      bidi: this.setting('Xengine-signature.maximum_char_limit')
-    }))];
-  };
-
-  return SignatureSettingsModal;
-}(flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1___default.a);
-
-
-
-/***/ }),
-
 /***/ "./src/admin/index.js":
 /*!****************************!*\
   !*** ./src/admin/index.js ***!
@@ -198,16 +110,50 @@ function (_SettingsModal) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/app */ "flarum/app");
-/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_SignatureSettingsModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/SignatureSettingsModal */ "./src/admin/components/SignatureSettingsModal.js");
+/* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fof-components */ "@fof-components");
+/* harmony import */ var _fof_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_fof_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/app */ "flarum/app");
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_1__);
 
 
-flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('Xengine-signature', function () {
-  flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.extensionSettings['Xengine-signature'] = function () {
-    return flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.modal.show(new _components_SignatureSettingsModal__WEBPACK_IMPORTED_MODULE_1__["default"]());
+var SettingsModal = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].SettingsModal,
+    StringItem = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].items.StringItem;
+flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('cxsquared/signature', function () {
+  flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.extensionSettings['cxsquared/signature'] = function () {
+    return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.modal.show(SettingsModal, {
+      tite: flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('cxsquared-signature.admin.title'),
+      items: function items(s) {
+        return [m("div", {
+          className: "Forum-group"
+        }, m(StringItem, {
+          name: "Xengine-signature.maximum_image_width",
+          setting: s,
+          label: flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('cxsquared-signature.settings.maximum_image_width.description')
+        }), m(StringItem, {
+          name: "Xengine-signature.maximum_image_height",
+          setting: s
+        }), m(StringItem, {
+          name: "Xengine-signature.maximum_image_count",
+          setting: s
+        }), m(StringItem, {
+          name: "Xengine-signature.maximum_image_char_limit",
+          setting: s
+        }))];
+      }
+    });
   };
 });
+
+/***/ }),
+
+/***/ "@fof-components":
+/*!******************************************************!*\
+  !*** external "flarum.extensions['fof-components']" ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.extensions['fof-components'];
 
 /***/ }),
 
@@ -219,17 +165,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('Xengine-sign
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['app'];
-
-/***/ }),
-
-/***/ "flarum/components/SettingsModal":
-/*!*****************************************************************!*\
-  !*** external "flarum.core.compat['components/SettingsModal']" ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = flarum.core.compat['components/SettingsModal'];
 
 /***/ })
 

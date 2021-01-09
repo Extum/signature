@@ -7,8 +7,8 @@ import SignatureTextarea from '../Fields/SignatureTextarea';
 import SignatureLoadingModal from '../Modal/SignatureLoadingModal';
 
 export default class SignatureSettings extends UserPage {
-    init() {
-        super.init();
+    oninit(vnode) {
+        super.init(vnode);
 
         this.show(app.session.user);
         app.drawer.hide();
@@ -45,7 +45,7 @@ export default class SignatureSettings extends UserPage {
         );
         items.add('saveSignature',
             Button.component({
-                children: app.translator.trans('Xengine-signature.forum.buttons.save'),
+                text: app.translator.trans('Xengine-signature.forum.buttons.save'),
                 className: 'Button',
                 onclick: () => this.saveSignature()
             })
@@ -55,10 +55,10 @@ export default class SignatureSettings extends UserPage {
     }
 
     saveSignature() {
-        app.modal.show(new SignatureLoadingModal({
+        app.modal.show(SignatureLoadingModal, {
             title: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
             value: app.translator.trans('Xengine-signature.forum.modal.loading.content')
-        }));
+        });
         this.signature = $('.Signature').trumbowyg('html');
 
         const data = {Signature: this.signature};
@@ -74,12 +74,12 @@ export default class SignatureSettings extends UserPage {
 
     response(response) {
         if (!response.status) {
-            app.modal.show(new SignatureLoadingModal({
+            app.modal.show(SignatureLoadingModal, {
                 title: app.translator.trans('Xengine-signature.forum.modal.error.title'),
                 value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
                 errors: response.errors,
                 close: true
-            }));
+            });
         }else{
             this.model.setSignature(this.signature).then(()=> {
                 window.location.reload();

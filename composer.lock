@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "778fb3ccb9f9e32bcfbe7c0a01a58cb8",
+    "content-hash": "4064892f0e3935b334a340068f31627b",
     "packages": [
         {
             "name": "axy/backtrace",
@@ -1101,6 +1101,57 @@
                 }
             ],
             "time": "2020-11-02T12:53:20+00:00"
+        },
+        {
+            "name": "fof/components",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfFlarum/components.git",
+                "reference": "395c8b1729421ebda22aa46c9de2667b9e44e97e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfFlarum/components/zipball/395c8b1729421ebda22aa46c9de2667b9e44e97e",
+                "reference": "395c8b1729421ebda22aa46c9de2667b9e44e97e",
+                "shasum": ""
+            },
+            "require": {
+                "flarum/core": "^0.1.0-beta.14"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FoF\\Components\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Sevilla Martín",
+                    "email": "me+fof@datitisev.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "[NOT EXT] Reusable JavaScript components for your Flarum extension",
+            "keywords": [
+                "flarum",
+                "friendsofflarum"
+            ],
+            "support": {
+                "issues": "https://github.com/FriendsOfFlarum/components/issues",
+                "source": "https://github.com/FriendsOfFlarum/components/tree/0.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/fof",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-10-07T22:35:43+00:00"
         },
         {
             "name": "franzl/whoops-middleware",

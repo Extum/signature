@@ -1,13 +1,11 @@
 import Modal from 'flarum/components/Modal';
-import FieldSet from 'flarum/components/FieldSet';
-import ItemList from 'flarum/utils/ItemList';
 
 export default class SignatureLoadingModal extends Modal {
     init() {
-        this.value = this.props.value;
-        this.title = m.prop(this.props.title || '');
-        this.close = this.props.close || false;
-        this.errors = this.props.errors || false;
+        this.value = this.attrs.value;
+        this.title = m.prop(this.attrs.title || '');
+        this.close = this.attrs.close || false;
+        this.errors = this.attrs.errors || false;
     }
 
     isDismissible() {
