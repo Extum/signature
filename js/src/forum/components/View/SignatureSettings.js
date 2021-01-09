@@ -8,7 +8,7 @@ import SignatureLoadingModal from '../Modal/SignatureLoadingModal';
 
 export default class SignatureSettings extends UserPage {
     oninit(vnode) {
-        super.init(vnode);
+        super.oninit(vnode);
 
         this.show(app.session.user);
         app.drawer.hide();
@@ -36,19 +36,16 @@ export default class SignatureSettings extends UserPage {
         const items = new ItemList();
 
         items.add('signature',
-            SignatureTextarea.component({
-                className: 'Signature',
-                rows: 10,
-                cols: 100,
-                content: this.model.getSignature()
-            })
+            <SignatureTextarea className='Signature'
+                               rows={10}
+                               cols={100}
+                               content={this.model.getSignature()} />
         );
         items.add('saveSignature',
-            Button.component({
-                text: app.translator.trans('Xengine-signature.forum.buttons.save'),
-                className: 'Button',
-                onclick: () => this.saveSignature()
-            })
+            <Button className='Button'
+                    onclick={() => this.saveSignature()}>
+                {app.translator.trans('Xengine-signature.forum.buttons.save')}
+            </Button>
         );
 
         return items;
@@ -56,7 +53,7 @@ export default class SignatureSettings extends UserPage {
 
     saveSignature() {
         app.modal.show(SignatureLoadingModal, {
-            title: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
+            titleText: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
             value: app.translator.trans('Xengine-signature.forum.modal.loading.content')
         });
         this.signature = $('.Signature').trumbowyg('html');
@@ -75,7 +72,7 @@ export default class SignatureSettings extends UserPage {
     response(response) {
         if (!response.status) {
             app.modal.show(SignatureLoadingModal, {
-                title: app.translator.trans('Xengine-signature.forum.modal.error.title'),
+                titleText: app.translator.trans('Xengine-signature.forum.modal.error.title'),
                 value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
                 errors: response.errors,
                 close: true

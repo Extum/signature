@@ -1,33 +1,35 @@
 <?php
 namespace XEngine\Signature\Validation;
 
-use Psr\Http\Message\ServerRequestInterface;
-use Tobscure\JsonApi\Document;
-use Flarum\Http\Controller\ControllerInterface;
-use Zend\Diactoros\Response\JsonResponse;
 use Symfony\Component\DomCrawler\Crawler;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Illuminate\Support\Arr;
+use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Message\ResponseInterface as ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ValidateSignature implements ControllerInterface
+class ValidateSignature implements RequestHandlerInterface 
 {
     private $settings;
     public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
     }
-    public function handle(ServerRequestInterface $request)
+
+    public function handle(Request $request) : ResponseInterface
     {
-        $signature = array_get($request->getParsedBody(), 'Signature');
+        $signature = Arr::get($request->getParsedBody(), 'Signature');
         $sanitized = strip_tags($signature);
         $errorBag = [];
 
-        $char_count = $this->settings->get('xengine-signature.maximum_char_limit') != "" ? $this->settings->get('xengine-signature.maximum_char_limit') : 1000;
-        $max_width = $this->settings->get('xengine-signature.maximum_image_width') != "" ? $this->settings->get('xengine-signature.maximum_image_width') : 350;
-        $max_height = $this->settings->get('xengine-signature.maximum_image_height') != "" ? $this->settings->get('xengine-signature.maximum_image_height') : 500;
-        $image_count = $this->settings->get('xengine-signature.maximum_image_count') != "" ? $this->settings->get('xengine-signature.maximum_image_count') : 5;
+        $char_count = $this->settings->get('xengine-signature.maximum_char_limit', 1000);
+        $max_width = $this->settings->get('xengine-signature.maximum_image_width', 350);
+        $max_height = $this->settings->get('xengine-signature.maximum_image_height', 500);
+        $image_count = $this->settings->get('xengine-signature.maximum_image_count', 5);
 
         if (strlen($sanitized) > $char_count) {
-            $errorBag[] = app('translator')->trans('xengine-signature.forum.errors.max_char_limit_exceed');
+            $errorBag[] = app('translator')->trans('Xengine-signature.forum.errors.max_char_limit_exceed');
         }
         $crawler = (new Crawler($signature))->filter('img');
         $width = [];

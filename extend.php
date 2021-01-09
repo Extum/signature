@@ -25,8 +25,8 @@ new Extend\Locales(__DIR__.'/locale'),
 (new Extend\Frontend('admin'))
   ->js(__DIR__.'/js/dist/admin.js'),
   
-(new Extend\Routes('forum'))
-  ->get('/settings/signature', 'settings.signature', AssertRegistered::class),
+(new Extend\Frontend('forum'))
+  ->route('/settings/signature', 'settings.signature'),
   
 (new Extend\Routes('api'))
   ->post('/settings/signature/validate', 'settings.signature', ValidateSignature::class),

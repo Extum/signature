@@ -1,11 +1,11 @@
-cxsquared-signature:
+Xengine-signature:
     forum:
         buttons:
             signature: Signature
             save: Save Signature
         modal:
             loading:
-                title: Loading
+                title: Saving 
                 content: Please wait...
             error:
                 title: Whoops! Encountered some errors...

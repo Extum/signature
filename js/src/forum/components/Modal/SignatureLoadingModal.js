@@ -1,11 +1,17 @@
 import Modal from 'flarum/components/Modal';
 
 export default class SignatureLoadingModal extends Modal {
-    init() {
+    oninit(vnode) {
+        super.oninit(vnode);
+
         this.value = this.attrs.value;
-        this.title = m.prop(this.attrs.title || '');
+        this.titleText = this.attrs.titleText || '';
         this.close = this.attrs.close || false;
         this.errors = this.attrs.errors || false;
+    }
+
+    title() {
+        return this.titleText;
     }
 
     isDismissible() {
@@ -21,7 +27,7 @@ export default class SignatureLoadingModal extends Modal {
         if (this.errors) {
             ErrorWindow = m("ul",
                 this.errors.map(function (error) {
-                    return m("li", error);
+                    return m("li", {}, error);
                 })
             )
         }
