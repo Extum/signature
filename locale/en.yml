@@ -1,14 +1,14 @@
-katosdev-signature:
+Xengine-signature:
     forum:
         buttons:
             signature: Signature
             save: Save Signature
         modal:
             loading:
-                title: Loading
+                title: Saving 
                 content: Please wait...
             error:
-                title: Whoops! Encountered some errors...
+                title: Whoops! Encountered some errors while saving...
                 content: List of errors:
         errors:
              max_char_limit_exceed: Maximum character limit exceeded.

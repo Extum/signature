@@ -1,3 +1,4 @@
+import app from 'flarum/app';
 import UserSignature from '../Model/UserSignature';
 import UserPage from 'flarum/components/UserPage';
 import listItems from 'flarum/helpers/listItems';
@@ -7,8 +8,8 @@ import SignatureTextarea from '../Fields/SignatureTextarea';
 import SignatureLoadingModal from '../Modal/SignatureLoadingModal';
 
 export default class SignatureSettings extends UserPage {
-    init() {
-        super.init();
+    oninit(vnode) {
+        super.oninit(vnode);
 
         this.show(app.session.user);
         app.drawer.hide();
@@ -18,13 +19,12 @@ export default class SignatureSettings extends UserPage {
         this.model = new UserSignature(app.session.user);
     }
 
-
     content() {
         return (
             <div className="SettingsPage">
                 <ul>{listItems(this.signatureItems().toArray())}</ul>
             </div>
-        )
+        );
     }
 
     /**
@@ -35,55 +35,45 @@ export default class SignatureSettings extends UserPage {
     signatureItems() {
         const items = new ItemList();
 
-        items.add('signature',
-            SignatureTextarea.component({
-                className: 'Signature',
-                rows: 10,
-                cols: 100,
-                content: this.model.getSignature()
-            })
-        );
-        items.add('saveSignature',
-            Button.component({
-                children: app.translator.trans('Xengine-signature.forum.buttons.save'),
-                className: 'Button',
-                onclick: () => this.saveSignature()
-            })
+        items.add('signature', <SignatureTextarea className="Signature" rows={10} cols={100} content={this.model.getSignature()} />);
+        items.add(
+            'saveSignature',
+            <Button className="Button" onclick={() => this.saveSignature()}>
+                {app.translator.trans('Xengine-signature.forum.buttons.save')}
+            </Button>
         );
 
         return items;
     }
 
     saveSignature() {
-        app.modal.show(new SignatureLoadingModal({
-            title: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
-            value: app.translator.trans('Xengine-signature.forum.modal.loading.content')
-        }));
+        app.modal.show(SignatureLoadingModal, {
+            titleText: app.translator.trans('Xengine-signature.forum.modal.loading.title'),
+            value: app.translator.trans('Xengine-signature.forum.modal.loading.content'),
+        });
         this.signature = $('.Signature').trumbowyg('html');
 
-        const data = {Signature: this.signature};
+        const data = { signature: this.signature };
 
         app.request({
             url: app.forum.attribute('apiUrl') + '/settings/signature/validate',
             method: 'POST',
-            data: data
-        }).then(
-            this.response.bind(this)
-        );
+            body: data,
+        }).then(this.response.bind(this));
     }
 
     response(response) {
         if (!response.status) {
-            app.modal.show(new SignatureLoadingModal({
-                title: app.translator.trans('Xengine-signature.forum.modal.error.title'),
-                value: app.translator.trans('Xengine-signature.forum.modal.error.content'),
-                errors: response.errors,
-                close: true
-            }));
-        }else{
-            this.model.setSignature(this.signature).then(()=> {
+            if (response.errors) {
+                app.alerts.show({ type: 'error ' }, [app.translator.trans('Xengine-signature.forum.modal.error.title'), '\n', response.errors.map(e => `${e}\n`)]);
+            } else {
+                app.alerts.show({ type: 'error ' }, app.translator.trans('Xengine-signature.forum.modal.error.title'));
+            }
+            app.modal.close();
+        } else {
+            this.model.setSignature(this.signature).then(() => {
                 window.location.reload();
-            })
+            });
         }
     }
 }

@@ -1,30 +1,29 @@
 <?php
 namespace XEngine\Signature\Model;
 
+use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Event\PrepareApiAttributes;
-use Flarum\User\AssertPermissionTrait;
 use Flarum\Event\UserWillBeSaved;
 use Illuminate\Contracts\Events\Dispatcher;
-use Symfony\Component\DomCrawler\Crawler;
+use Flarum\User\Event\Saving;
+use Illuminate\Support\Arr;
 
 class UserSignatureAttributes
 {
-    use AssertPermissionTrait;
-
     /**
      * @param Dispatcher $events
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PrepareApiAttributes::class, [$this, 'addApiAttributes']);
-        $events->listen(UserWillBeSaved::class, [$this, 'whenUserWillBeSaved']);
+        $events->listen(Serializing::class, [$this, 'addApiAttributes']);
+        $events->listen(Saving::class, [$this, 'whenUserWillBeSaved']);
     }
 
     /**
      * @param PrepareApiAttributes $event
      */
-    public function addApiAttributes(PrepareApiAttributes $event)
+    public function addApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(UserSerializer::class)) {
             $event->attributes['signature'] = $event->model->signature;
@@ -34,20 +33,14 @@ class UserSignatureAttributes
     /**
      * @param UserWillBeSaved $event
      */
-    public function whenUserWillBeSaved(UserWillBeSaved $event)
+    public function whenUserWillBeSaved(Saving $event)
     {
-        $attributes = array_get($event->data, 'attributes', []);
+        $attributes = Arr::get($event->data, 'attributes', []);
         if (array_key_exists('signature', $attributes)) {
             $user = $event->user;
             $actor = $event->actor;
             if ($actor->id !== $user->id) {
-                $this->assertPermission(
-                    $this->elementsOnlyRemoved(
-                        $user->signature,
-                        $attributes['signature']
-                    )
-                );
-                $this->assertCan($actor, 'edit', $user);
+                $actor->assertCan('edit', $user);
             }
             $user->signature = $attributes['signature'];
         }

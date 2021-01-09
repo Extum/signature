@@ -1,13 +1,17 @@
 import Modal from 'flarum/components/Modal';
-import FieldSet from 'flarum/components/FieldSet';
-import ItemList from 'flarum/utils/ItemList';
 
 export default class SignatureLoadingModal extends Modal {
-    init() {
-        this.value = this.props.value;
-        this.title = m.prop(this.props.title || '');
-        this.close = this.props.close || false;
-        this.errors = this.props.errors || false;
+    oninit(vnode) {
+        super.oninit(vnode);
+
+        this.value = this.attrs.value;
+        this.titleText = this.attrs.titleText || '';
+        this.close = this.attrs.close || false;
+        this.errors = this.attrs.errors || false;
+    }
+
+    title() {
+        return this.titleText;
     }
 
     isDismissible() {
@@ -21,11 +25,12 @@ export default class SignatureLoadingModal extends Modal {
     content() {
         let ErrorWindow = '';
         if (this.errors) {
-            ErrorWindow = m("ul",
+            ErrorWindow = m(
+                'ul',
                 this.errors.map(function (error) {
-                    return m("li", error);
+                    return m('li', {}, error);
                 })
-            )
+            );
         }
         return (
             <div className="Modal-body">
@@ -34,5 +39,4 @@ export default class SignatureLoadingModal extends Modal {
             </div>
         );
     }
-
 }
